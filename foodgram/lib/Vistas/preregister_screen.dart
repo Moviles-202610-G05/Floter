@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgram/Vistas/registerstudent_screen.dart';
 
 class PreregisterScreen extends StatefulWidget {
   const PreregisterScreen({Key? key}) : super(key: key);
@@ -209,9 +210,21 @@ class _PreRegisterScreenState extends State<PreregisterScreen> {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: _selectedAccountType != null
-                      ? () {
-                          // Navigate to sign up form with selected type
-                        }
+                      ? _selectedAccountType == 'restaurant' 
+                        ? () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const PreregisterScreen()),
+                            );
+                          }
+                        : _selectedAccountType == 'student' 
+                          ? () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const RegisterStudent()),
+                            );
+                          }
+                          : null
                       : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFF6347),

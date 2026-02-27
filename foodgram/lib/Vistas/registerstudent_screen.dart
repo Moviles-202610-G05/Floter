@@ -1,14 +1,13 @@
-
 import 'package:flutter/material.dart';
 
-class StudentSignUpScreen extends StatefulWidget {
-  const StudentSignUpScreen({Key? key}) : super(key: key);
+class RegisterStudent extends StatefulWidget {
+  const RegisterStudent({Key? key}) : super(key: key);
 
   @override
-  State<StudentSignUpScreen> createState() => _StudentSignUpScreenState();
+  State<RegisterStudent> createState() => _RegisterStudentState();
 }
 
-class _StudentSignUpScreenState extends State<StudentSignUpScreen> {
+class _RegisterStudentState extends State<RegisterStudent> {
   final _fullNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _universityCodeController = TextEditingController();
@@ -27,7 +26,12 @@ class _StudentSignUpScreenState extends State<StudentSignUpScreen> {
     'Dairy-Free',
   ];
 
-  final List<String> _carriers = ['Carrier 1', 'Carrier 2', 'Carrier 3'];
+  final List<String> _carriers = [
+    'Carrier 1',
+    'Carrier 2',
+    'Carrier 3',
+    'Carrier 4'
+  ];
 
   @override
   void dispose() {
@@ -45,291 +49,377 @@ class _StudentSignUpScreenState extends State<StudentSignUpScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Color(0xFFFF6347)),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
-          'Student',
+          'Student Sign Up',
           style: TextStyle(
-            color: Colors.black87,
+            color: Colors.black,
             fontSize: 16,
+            fontWeight: FontWeight.w600,
           ),
         ),
         centerTitle: true,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 16),
-              // Title
-              const Text(
-                'Student Sign Up',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 12),
-              // Subtitle
-              const Text(
-                'Create your student account to get started with exclusive campus deals and favorite meals.',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-                  height: 1.5,
-                ),
-              ),
-              const SizedBox(height: 32),
-              // Full Name Field
-              const Text(
-                'Full Name',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _fullNameController,
-                decoration: InputDecoration(
-                  hintText: 'Enter your full name',
-                  hintStyle: const TextStyle(color: Colors.grey),
-                  filled: true,
-                  fillColor: Colors.grey[50],
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 14,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              // University Email Field
-              const Text(
-                'University Email',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  hintText: 'name@university.edu',
-                  hintStyle: const TextStyle(color: Colors.grey),
-                  filled: true,
-                  fillColor: Colors.grey[50],
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 14,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              // University Code and Carrier Row
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Subtitle
+                    const Text(
+                      'Create your student account to get started with exclusive campus deals and favorite meals.',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.grey,
+                        height: 1.5,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    // Progress Indicator
+                    Row(
                       children: [
-                        const Text(
-                          'University Code',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black87,
+                        Expanded(
+                          child: Container(
+                            height: 4,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFF6347),
+                              borderRadius: BorderRadius.circular(2),
+                            ),
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        TextField(
-                          controller: _universityCodeController,
-                          decoration: InputDecoration(
-                            hintText: 'ID Number',
-                            hintStyle: const TextStyle(color: Colors.grey),
-                            filled: true,
-                            fillColor: Colors.grey[50],
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: Container(
+                            height: 4,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(2),
                             ),
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 14,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Expanded(
+                          child: Container(
+                            height: 4,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(2),
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    flex: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    const SizedBox(height: 24),
+                    // Full Name Field
+                    const Text(
+                      'Full Name',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _fullNameController,
+                      decoration: InputDecoration(
+                        hintText: 'Enter your full name',
+                        hintStyle: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: 14,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[50],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    // University Email Field
+                    const Text(
+                      'University Email',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        hintText: 'name@university.edu',
+                        hintStyle: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: 14,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[50],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    // University Code and Carrier Row
+                    Row(
                       children: [
-                        const Text(
-                          'Carrier',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black87,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'University Code',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              TextField(
+                                controller: _universityCodeController,
+                                decoration: InputDecoration(
+                                  hintText: 'ID Number',
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey[400],
+                                    fontSize: 14,
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.grey[50],
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 14,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[50],
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              value: _selectedCarrier,
-                              hint: const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 12),
-                                child: Text('Select...'),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Carrier',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black87,
+                                ),
                               ),
-                              icon: const Padding(
-                                padding: EdgeInsets.only(right: 12),
-                                child: Icon(Icons.expand_more),
+                              const SizedBox(height: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[50],
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    value: _selectedCarrier,
+                                    hint: Text(
+                                      'Select...',
+                                      style: TextStyle(
+                                        color: Colors.grey[400],
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    icon: Icon(
+                                      Icons.expand_more,
+                                      color: Colors.grey[600],
+                                    ),
+                                    isExpanded: true,
+                                    items: _carriers
+                                        .map((carrier) => DropdownMenuItem(
+                                              value: carrier,
+                                              child: Text(carrier),
+                                            ))
+                                        .toList(),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _selectedCarrier = value;
+                                      });
+                                    },
+                                  ),
+                                ),
                               ),
-                              isExpanded: true,
-                              items: _carriers
-                                  .map((carrier) => DropdownMenuItem(
-                                        value: carrier,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 12,
-                                          ),
-                                          child: Text(carrier),
-                                        ),
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  _selectedCarrier = value;
-                                });
-                              },
-                            ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 28),
-              // Food Preferences
-              const Text(
-                'Food Preferences',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black87,
-                ),
-              ),
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: _foodPreferences.map((preference) {
-                  final isSelected = _selectedPreferences.contains(preference);
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        if (isSelected) {
-                          _selectedPreferences.remove(preference);
-                        } else {
-                          _selectedPreferences.add(preference);
-                        }
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
+                    const SizedBox(height: 24),
+                    // Food Preferences
+                    const Text(
+                      'Food Preferences',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
                       ),
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? const Color(0xFFFF6347)
-                            : Colors.white,
-                        border: Border.all(
-                          color: isSelected
-                              ? const Color(0xFFFF6347)
-                              : Colors.grey[300]!,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        preference,
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                          color: isSelected ? Colors.white : Colors.grey[700],
+                    ),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 10,
+                      children: _foodPreferences.map((preference) {
+                        final isSelected = _selectedPreferences.contains(preference);
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (isSelected) {
+                                _selectedPreferences.remove(preference);
+                              } else {
+                                _selectedPreferences.add(preference);
+                              }
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 18,
+                              vertical: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? const Color(0xFFFF6347)
+                                  : Colors.white,
+                              border: Border.all(
+                                color: isSelected
+                                    ? const Color(0xFFFF6347)
+                                    : Colors.grey[300]!,
+                                width: 1.5,
+                              ),
+                              borderRadius: BorderRadius.circular(22),
+                            ),
+                            child: Text(
+                              preference,
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                color: isSelected ? Colors.white : Colors.grey[700],
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 28),
+                    // Already have account
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          // Navigate to login
+                        },
+                        child: const Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Already have an account? ',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'Log in',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFFFF6347),
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
-                  );
-                }).toList(),
-              ),
-              const SizedBox(height: 32),
-              // Terms and Privacy
-              const Center(
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Already have an account? ',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey,
+                    const SizedBox(height: 16),
+                    // Terms and Privacy
+                    Center(
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'BY CLICKING REGISTER, YOU AGREE TO OUR\n',
+                              style: TextStyle(
+                                fontSize: 9,
+                                color: Colors.grey[500],
+                                height: 1.4,
+                              ),
+                            ),
+                            TextSpan(
+                              text: 'TERMS OF SERVICE',
+                              style: TextStyle(
+                                fontSize: 9,
+                                color: Colors.grey[500],
+                                fontWeight: FontWeight.w600,
+                                height: 1.4,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' AND ',
+                              style: TextStyle(
+                                fontSize: 9,
+                                color: Colors.grey[500],
+                                height: 1.4,
+                              ),
+                            ),
+                            TextSpan(
+                              text: 'PRIVACY POLICY',
+                              style: TextStyle(
+                                fontSize: 9,
+                                color: Colors.grey[500],
+                                fontWeight: FontWeight.w600,
+                                height: 1.4,
+                              ),
+                            ),
+                            const TextSpan(
+                              text: '.',
+                              style: TextStyle(
+                                fontSize: 9,
+                                color: Colors.grey,
+                                height: 1.4,
+                              ),
+                            ),
+                          ],
                         ),
+                        textAlign: TextAlign.center,
                       ),
-                      TextSpan(
-                        text: 'Log in',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFFFF6347),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                  ],
                 ),
               ),
-              const SizedBox(height: 12),
-              Center(
-                child: Text(
-                  'BY CLICKING REGISTER, YOU AGREE TO OUR\nTERMS OF SERVICE AND PRIVACY POLICY.',
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.grey[500],
-                    height: 1.4,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              const SizedBox(height: 20),
-              // Create Account Button
-              SizedBox(
+            ),
+            // Create Account Button (Fixed at bottom)
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: SizedBox(
                 width: double.infinity,
                 height: 56,
                 child: ElevatedButton(
@@ -353,9 +443,8 @@ class _StudentSignUpScreenState extends State<StudentSignUpScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
