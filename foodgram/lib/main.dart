@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodgram/Vistas/Login_screen.dart' show LoginScreen;
-
+import 'package:foodgram/Vistas/user_screen.dart' show UserScreen;
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
-      home: const LoginScreen(), // 👈 aquí defines la primera pantalla
+      home: const UserScreen(), // 👈 aquí defines la primera pantalla
     );
   }
 }
