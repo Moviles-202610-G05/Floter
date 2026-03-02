@@ -195,11 +195,11 @@ class _StudentSignUpScreenState extends State<StudentSignUpScreen> {
                           ),
                           decoration: BoxDecoration(
                             color: isSelected
-                                ? const Color(0xFFFF6347)
+                                ? const Color(0xFFFF6933)
                                 : Colors.white,
                             border: Border.all(
                               color: isSelected
-                                  ? const Color(0xFFFF6347)
+                                  ? const Color(0xFFFF6933)
                                   : Colors.grey[300]!,
                               width: 1.5,
                             ),
@@ -234,7 +234,7 @@ class _StudentSignUpScreenState extends State<StudentSignUpScreen> {
                             text: 'Log in',
                             style: TextStyle(
                               fontSize: 12,
-                              color: Color(0xFFFF6347),
+                              color: Color(0xFFFF6933),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -299,29 +299,5 @@ class _StudentSignUpScreenState extends State<StudentSignUpScreen> {
       );
       
   }
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    required IconData icon,
-    TextInputType? keyboardType,
-    String? Function(String?)? validator,
-  }) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyboardType,
-      validator: validator,
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: Icon(icon, color: Colors.grey, size: 20),
-        filled: true,
-        fillColor: Colors.grey[100],
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(28),
-          borderSide: BorderSide.none,
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        labelStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-      ),
-    );
-  }
+  
 }

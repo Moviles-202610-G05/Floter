@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgram/widgets.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
@@ -8,7 +9,7 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
-  int _selectedIndex = 0;
+
 
   final List<Map<String, dynamic>> posts = [
     {
@@ -18,8 +19,9 @@ class _FeedScreenState extends State<FeedScreen> {
       'location': 'La Traviata Ristorante',
       'likes': 1234,
       'comments': 86,
+      'hashtags': ["#Foodie", "#Truffle"],
       'description':
-          'The best truffle pasta I\'ve had in the city. The aroma is just incredible. #Foodie #Truffle',
+          'The best truffle pasta I\'ve had in the city. The aroma is just incredible.',
       'postImage':
           'https://images.unsplash.com/photo-1473093295203-cad00df16e50?w=500',
       'comments_data': [
@@ -37,6 +39,7 @@ class _FeedScreenState extends State<FeedScreen> {
       'location': 'Otaku Sushi Bar',
       'likes': 856,
       'comments': 42,
+      'hashtags': ["#Foodie"],
       'description':
           'Fresh catch from this morning. You can easily taste the difference!',
       'postImage':
@@ -53,6 +56,7 @@ class _FeedScreenState extends State<FeedScreen> {
       'location': 'The Burger Joint',
       'likes': 2145,
       'comments': 156,
+      'hashtags': ["#Foodie"],
       'description':
           'Homemade beef burger with special sauce and fresh ingredients. Worth every bite! #BurgerLife',
       'postImage':
@@ -68,101 +72,89 @@ class _FeedScreenState extends State<FeedScreen> {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0.5,
-        leadingWidth: 173,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
-          child: Row(
-            children: [
-              const Icon(Icons.restaurant_menu, color: Color(0xFFFF6347), size: 28),
-              const SizedBox(width: 4),
-              const Text(
-                'FoodGram',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFFF6347),
-                ),
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: const Color(0xFFFAFAFA),
+    body: NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (overScroll) {
+        overScroll.disallowIndicator();
+        return true;
+      },
+      child: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Colors.white,
+            elevation: 0.5,
+            leadingWidth: 173,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Row(
+                children: const [
+                  Icon(Icons.restaurant_menu, color: Color(0xFFFF6347), size: 28),
+                  SizedBox(width: 4),
+                  Text(
+                    'FoodGram',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFFF6347),
+                    ),
+                  ),
+                ],
               ),
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.favorite_border, color: Colors.red, size: 24),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.notifications_none, color: Colors.black, size: 24),
+                onPressed: () {},
+              ),
+              const SizedBox(width: 8),
             ],
           ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite_border, color: Colors.red, size: 24),
-            onPressed: () {},
+
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final post = posts[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: FoodPostCard(
+                    userName: post['userName'],
+                    userInitial: post['userInitial'],
+                    userColor: post['userColor'],
+                    location: post['location'],
+                    likes: post['likes'],
+                    hashtags: post['hashtags'],
+                    comments: post['comments'],
+                    description: post['description'],
+                    postImage: post['postImage'],
+                    commentsData: post['comments_data'],
+                  ),
+                );
+              },
+              childCount: posts.length,
+            ),
           ),
-          IconButton(
-            icon: const Icon(Icons.notifications_none, color: Colors.black, size: 24),
-            onPressed: () {},
-          ),
-          const SizedBox(width: 8),
         ],
       ),
-      body: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (overScroll) {
-          overScroll.disallowIndicator();
-          return true;
-        },
-        child: ListView.separated(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          itemCount: posts.length,
-          separatorBuilder: (context, index) => const SizedBox(height: 8),
-          itemBuilder: (context, index) {
-            final post = posts[index];
-            return FoodPostCard(
-              userName: post['userName'],
-              userInitial: post['userInitial'],
-              userColor: post['userColor'],
-              location: post['location'],
-              likes: post['likes'],
-              comments: post['comments'],
-              description: post['description'],
-              postImage: post['postImage'],
-              commentsData: post['comments_data'],
-            );
-          },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Create new post')),
-          );
-        },
-        backgroundColor: const Color(0xFFFF6347),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        child: const Icon(Icons.add, color: Colors.white, size: 28),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xFFFF6347),
-        unselectedItemColor: Colors.grey[600],
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        elevation: 8,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: 'Saves'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Likes'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-      ),
-    );
-  }
-}
+    ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Create new post')),
+        );
+      },
+      backgroundColor: const Color(0xFFFF6347),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      child: const Icon(Icons.add, color: Colors.white, size: 28),
+    ),
+  );
+}}
 
 // ============================================
 // COMPONENTES REUTILIZABLES PARA TODA LA APP
@@ -178,6 +170,7 @@ class FoodPostCard extends StatefulWidget {
   final int comments;
   final String description;
   final String postImage;
+  final List<String> hashtags;
   final List<Map<String, String>> commentsData;
 
   const FoodPostCard({
@@ -191,6 +184,7 @@ class FoodPostCard extends StatefulWidget {
     required this.description,
     required this.postImage,
     required this.commentsData,
+    required this.hashtags
   });
 
   @override
@@ -246,6 +240,7 @@ class _FoodPostCardState extends State<FoodPostCard> {
           PostDescription(
             userName: widget.userName,
             description: widget.description,
+            hashtags: widget.hashtags
           ),
 
           // --- VIEW COMMENTS ---
@@ -402,7 +397,6 @@ class InteractionButtons extends StatelessWidget {
             onTap: onLikeTap,
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.red, width: 1.5),
                 borderRadius: BorderRadius.circular(6),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
@@ -430,7 +424,6 @@ class InteractionButtons extends StatelessWidget {
           const SizedBox(width: 10),
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey[300]!, width: 1.5),
               borderRadius: BorderRadius.circular(6),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
@@ -468,11 +461,13 @@ class InteractionButtons extends StatelessWidget {
 class PostDescription extends StatelessWidget {
   final String userName;
   final String description;
+  final List<String>  hashtags; 
 
   const PostDescription({
     super.key,
     required this.userName,
     required this.description,
+    required this.hashtags
   });
 
   @override
@@ -480,29 +475,52 @@ class PostDescription extends StatelessWidget {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: '$userName ',
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-                fontSize: 13,
-              ),
+      child: Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
+    RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: '$userName ',
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              fontSize: 13,
             ),
-            TextSpan(
-              text: description,
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
-              ),
+          ),
+          TextSpan(
+            text: description,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
+    ),
+    const SizedBox(height: 4),
+    Wrap(
+      spacing: 6,
+      runSpacing: 4,
+      children: hashtags.map((tag) {
+        return Text(
+          tag,
+          style: const TextStyle(
+            color: Color(0xFFFF6933), // estilo típico de hashtag
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
+        );
+      }).toList(),
+    ),
+  ],
+
+
+  
+
+    ));
   }
 }
 
@@ -527,7 +545,7 @@ class ViewCommentsButton extends StatelessWidget {
         child: Text(
           'View all $commentCount comments',
           style: const TextStyle(
-            color: Colors.grey,
+            color: Color(0xFFFF6933),
             fontSize: 11,
             fontWeight: FontWeight.w500,
           ),

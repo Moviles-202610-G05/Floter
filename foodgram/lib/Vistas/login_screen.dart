@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodgram/Vistas/feed_screen.dart';
+import 'package:foodgram/Vistas/pagesInsideStudent.dart';
 import 'package:foodgram/Vistas/preregister_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                      Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const FeedScreen()),
+                          MaterialPageRoute(builder: (context) => const Pages()),
                         );
                   },
                   style: ElevatedButton.styleFrom(
