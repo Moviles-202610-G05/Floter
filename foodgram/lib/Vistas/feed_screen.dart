@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foodgram/widgets.dart';
+import 'package:foodgram/Vistas/create_post_screen.dart';
+import 'package:foodgram/Vistas/widgets/widgets.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({super.key});
@@ -145,9 +146,11 @@ Widget build(BuildContext context) {
     ),
     floatingActionButton: FloatingActionButton(
       onPressed: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Create new post')),
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const CreatePostScreen()),
         );
+
       },
       backgroundColor: const Color(0xFFFF6347),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),

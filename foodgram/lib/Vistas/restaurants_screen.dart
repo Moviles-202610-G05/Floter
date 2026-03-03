@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodgram/Vistas/pagesInsideStudent.dart' show Pages, PagesState;
 import 'package:foodgram/Vistas/restaurant_detalle_screen.dart';
 
 class RestaurantFeed extends StatefulWidget {
@@ -192,21 +193,12 @@ class _RestaurantFeed extends State<RestaurantFeed> {
                 restaurants.length,
                 (index) => GestureDetector(
   onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => RestaurantDetailScreen(
-          restaurantName: 'La Trattoria Milano',
-          restaurantImage: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200',
-          rating: 4.8,
-          reviews: '2.4k+',
-          price: '\$\$\$',
-          cuisine: 'French Cuisine',
-          time: '25-35 min',
-          distance: '1.2 km',
-        ),
-      ),
-    );
+
+    final pagesState = context.findAncestorStateOfType<PagesState>();
+    pagesState?.setState(() {
+  pagesState.currentIndex2 = 1; // Cambia al índice de tu vista especial
+} );
+
   },
   child: RestaurantCard(
                   data: restaurants[index],
