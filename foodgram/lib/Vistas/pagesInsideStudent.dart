@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodgram/Vistas/feed_screen.dart';
+import 'package:foodgram/Vistas/restaurant_detalle_screen.dart';
 import 'package:foodgram/Vistas/restaurants_screen.dart';
 import 'package:foodgram/Vistas/user_screen.dart';
 
