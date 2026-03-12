@@ -26,7 +26,7 @@ class _UserScreenState extends State<UserScreen> {
   double _caloriesConsumed = 1200;
   double _proteinConsumed  = 80;
   double _carbsConsumed    = 140;
-  double _fatConsumed      = 35;
+  double _fatConsumed      = 35;    
 
   // Datos de perfil
   String _name     = 'Alex Johnson';
