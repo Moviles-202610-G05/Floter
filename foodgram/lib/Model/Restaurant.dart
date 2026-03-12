@@ -5,7 +5,7 @@ import 'menu.dart';
 
 class Restaurant {
   final String restaurantName;
-  final String restaurantImage;
+  final String Image;
   final double rating;
   final String price;
   final String cuisine;
@@ -13,14 +13,13 @@ class Restaurant {
   final List<Reviews> reviews;
   final List<Menu> menu;
   final String distance;
-  final dynamic long;
-  final dynamic lat;
-  final String badge;
-  final String badge2;
+  final double long;
+  final double lat;
+
 
   Restaurant({
     required this.restaurantName,
-    required this.restaurantImage,
+    required this.Image,
     required this.rating,
     required this.price,
     required this.cuisine,
@@ -30,14 +29,14 @@ class Restaurant {
     required this.distance,
     required this.long,
     required this.lat, 
-    required this.badge, 
-    required this.badge2,
+
   });
 
   factory Restaurant.fromMap(Map<String, dynamic> map) {
+    print("-----REVICION-----11");
     return Restaurant(
       restaurantName: map['restaurantName'] ?? '',
-      restaurantImage: map['restaurantImage'] ?? '',
+      Image: map['restaurantImage'] ?? '',
       rating: (map['rating'] ?? 0).toDouble(),
       price: map['price'] ?? '',
       cuisine: map['cuisine'] ?? '',
@@ -51,8 +50,6 @@ class Restaurant {
       distance: map['distance'] ?? '',
       long: (map['long'] ?? 0).toDouble(),
       lat: (map['lat'] ?? 0).toDouble(),
-      badge: map['badge'] ?? '',
-      badge2: map['badge2'] ?? '',
     );
   }
 
@@ -61,7 +58,7 @@ class Restaurant {
   Map<String, dynamic> toMap() {
     return {
       'restaurantName': restaurantName,
-      'restaurantImage': restaurantImage,
+      'image': Image,
       'rating': rating,
       'price': price,
       'cuisine': cuisine,
@@ -71,18 +68,35 @@ class Restaurant {
       'distance': distance,
       'long': long,
       'lat': lat,
-      'badge': badge,
-      'badge2': badge2,
     };
   }
 
   /// Trae todos los restaurantes desde Firestore
   static Future<List<Restaurant>> todosRestaurantes() async {
-    final snapshot =
-        await FirebaseFirestore.instance.collection('restaurants').get();
+    final snapshot = await FirebaseFirestore.instance.collection('restaurants').get();
+    print("Número de documentos: ${snapshot.docs.length}");
 
-    return snapshot.docs
-        .map((doc) => Restaurant.fromMap(doc.data()))
-        .toList();
+    List<Restaurant> restaurantes = [];
+
+    for (var doc in snapshot.docs) {
+      try {
+        // Intentamos convertir cada documento individualmente
+        final data = doc.data();
+        print("Procesando documento ID: ${doc.id}");
+        restaurantes.add(Restaurant.fromMap(data));
+      } catch (e) {
+        // ESTO te dirá exactamente qué campo está mal
+        print("❌ ERROR en el documento ${doc.id}: $e");
+      }
+    }
+
+    print("----Holaaa----"); //
+    return restaurantes;
   }
+
+  @override
+  String toString() {
+    return 'Restaurant(nombre: $restaurantName, direccion: $rating)';
+  }
+
 }

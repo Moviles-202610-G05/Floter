@@ -34,11 +34,15 @@ class _RestaurantFeed extends State<RestaurantFeed> {
   late List<Map<String, dynamic>> restaurants;
 
   Future<List<Restaurant>>  getRestaurants() async {
-    var restaurantes1 = Restaurant.todosRestaurantes();
     restaurants = [];
+    var restaurantes1 = await Restaurant.todosRestaurantes();
+    print("-----REVICION111-----");
+    print(restaurantes1);
+    
     for (Restaurant restaurante in await restaurantes1) {
       restaurants.add(restaurante.toMap());
     }
+    print(restaurantes1);
     return restaurantes1;
   }
 
@@ -47,6 +51,8 @@ class _RestaurantFeed extends State<RestaurantFeed> {
     return FutureBuilder<List<Restaurant>>(
     future: getRestaurants(),
     builder: (context, snapshot) {
+      print("-----REVICION55-----");
+      print(restaurants);
       if (snapshot.connectionState == ConnectionState.waiting) {
         return const Center(child: CircularProgressIndicator());
       }
