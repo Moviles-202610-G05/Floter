@@ -11,7 +11,7 @@ async function seedRestaurants() {
   const restaurants = [
    {
     "restaurantName": "La Pizzería",
-    "restaurantImage": "https://example.com/pizza.jpg",
+    "restaurantImage": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200",
     "rating": 4.5,
     "price": "$$",
     "cuisine": "Italiana",
@@ -49,7 +49,7 @@ async function seedRestaurants() {
   },
   {
     "restaurantName": "Sushi House",
-    "restaurantImage": "https://example.com/sushi.jpg",
+    "restaurantImage": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=1200",
     "rating": 4.7,
     "price": "$$$",
     "cuisine": "Japonesa",
@@ -87,7 +87,7 @@ async function seedRestaurants() {
   },
   {
     "restaurantName": "Burger Palace",
-    "restaurantImage": "https://example.com/burger.jpg",
+    "restaurantImage": "https://images.unsplash.com/photo-1544025162-d76694265947?w=1200",
     "rating": 4.3,
     "price": "$$",
     "cuisine": "Americana",
