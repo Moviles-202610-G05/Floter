@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:foodgram/Vistas/tracker_user_screen.dart' show TrackerScreen;
+import 'package:foodgram/View/tracker_user_screen.dart' show TrackerScreen;
 import 'package:foodgram/firebase_options.dart';
 
 Future<void> main() async {
