@@ -3,11 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Reviews {
   final String name;
-  final String rating;
+  final int rating;
   final String date;
   final String comment;
   final String avatar;
   final Color avatarColor;
+  final String restaurant; 
 
   Reviews({
     required this.name,
@@ -16,6 +17,7 @@ class Reviews {
     required this.comment,
     required this.avatar,
     required this.avatarColor,
+    required this.restaurant
   });
 
   // Convertir objeto a Map (para guardar en Firestore)
@@ -26,7 +28,8 @@ class Reviews {
       'date': date,
       'comment': comment,
       'avatar': avatar,
-      'avatarColor': avatarColor.value, // guardamos el int del color
+      'avatarColor': avatarColor.value,
+      'restaurant':  restaurant// guardamos el int del color
     };
   }
 
@@ -34,12 +37,13 @@ class Reviews {
 factory Reviews.fromMap(Map<String, dynamic> map) {
   return Reviews(
     name: map['name'] ?? '',
-    rating: map['rating']?.toString() ?? '', // Lo forzamos a String por si viene como número
+    rating: map['rating'] ?? '', // Lo forzamos a String por si viene como número
     date: map['date'] ?? '',
     comment: map['comment'] ?? '',
     avatar: map['avatar'] ?? '',
     // Lógica para convertir el String del JSON a un Color real
     avatarColor: _parseColor(map['avatarColor']),
+    restaurant: map['restaurant']
   );
 }
 
