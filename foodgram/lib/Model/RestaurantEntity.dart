@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foodgram/Model/ReviewsEntity.dart';
 
-import 'reviews.dart';
-import 'menu.dart';
 
 class Restaurant{
   final String name;
@@ -10,7 +9,6 @@ class Restaurant{
   final String price;
   final String cuisine;
   final String time;
-  final List<Reviews> reviews;
   final String distance;
   final double long;
   final double lat;
@@ -19,6 +17,8 @@ class Restaurant{
   final int numberReviews;
   final String description;
   final String direction;
+  final int spots;
+  final int spotsA;
 
 
   Restaurant({
@@ -28,7 +28,6 @@ class Restaurant{
     required this.price,
     required this.cuisine,
     required this.time,
-    required this.reviews,
     required this.distance,
     required this.long,
     required this.lat, 
@@ -36,9 +35,12 @@ class Restaurant{
     required this.badge2,
     required this.numberReviews, 
     required this.description,
-    required this.direction
+    required this.direction,
+    required this.spots,
+    required this.spotsA,
 
   });
+  
 
   factory Restaurant.fromMap(Map<String, dynamic> map) {
     print("-----REVICION-----11");
@@ -49,17 +51,16 @@ class Restaurant{
       price: map['price'] ?? '',
       cuisine: map['cuisine'] ?? '',
       time: map['time'] ?? '',
-      reviews: (map['reviews'] as List<dynamic>? ?? [])
-        .map((r) => Reviews.fromMap(r as Map<String, dynamic>))
-        .toList(),
       distance: map['distance'] ?? '',
       long: (map['long'] ?? 0).toDouble(),
       lat: (map['lat'] ?? 0).toDouble(),
-      numberReviews: map['reviews'].length,
+      numberReviews: map['nuberReviews'],
       badge: map['badge'] ?? '', 
       badge2: map['badge2'] ?? '',
       description: map['description'] ?? '',
       direction: map['direction']??'',
+      spots: map['spots'],
+      spotsA: map['spotsA'],
     
     );
   }
@@ -74,7 +75,6 @@ class Restaurant{
       'price': price,
       'cuisine': cuisine,
       'time': time,
-      'reviews': reviews.map((r) => r.toMap()).toList(),
       'distance': distance,
       'long': long,
       'lat': lat,
@@ -82,8 +82,9 @@ class Restaurant{
       'badge2': badge2,
       'numberReviews': numberReviews.toString(),
       'description': description,
-      'direction': direction
-
+      'direction': direction,
+      'spots': spots,
+      'spotsA': spots
     };
   }
 

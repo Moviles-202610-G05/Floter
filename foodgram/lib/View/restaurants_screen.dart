@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodgram/Model/RestaurantEntity.dart';
 import 'package:foodgram/Model/RestaurantRepository.dart';
-import 'package:foodgram/Presenter/Restaurant_Presenter.dart';
+import 'package:foodgram/Presenter/RestaurantPresenter.dart';
 import 'package:foodgram/View/pagesInsideStudent.dart' show Pages, PagesState;
 import 'package:foodgram/View/restaurant_detalle_screen.dart';
 import 'package:foodgram/View/widgets/restaurants.dart';
@@ -207,7 +207,8 @@ class _RestaurantFeed extends State<RestaurantFeed>
                           onTap: () {
                                 final pagesState = context.findAncestorStateOfType<PagesState>();
                                 pagesState?.setState(() {
-                              pagesState.currentIndex2 = 1; // Cambia al índice de tu vista especial
+                                print(r.name);
+                                pagesState.setCurrentIndex2(1, r.name); // Cambia al índice de tu vista especial
                             } );
                             },
                           child: (RestaurantCard(

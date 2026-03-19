@@ -31,4 +31,5 @@ class RestaurantPresenter {
       view.mostrarError("Error al agregar restaurante: $e");
     }
   }
+  
 }
